@@ -1,3 +1,3 @@
 # linear_reflection
 
-Solution
+Solution for linear reflection.
