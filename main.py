@@ -3,11 +3,6 @@ from sympy import symbols, solve
 import matplotlib.pyplot as plt
 import numpy as np
 
-m1 = 1.63
-b1 = -6.6434
-
-m2 = -0.181818181818182
-b2 = 8.18181818181818
 
 class Line():
 
@@ -59,6 +54,10 @@ class Line():
         return Line(m, b)
 
 
+m2 = None
+b2 = 5
+m1 = 0.2 * b2
+b1 = 0.1*(b2**2) - m1*b2
 original_line = Line(m2, b2)
 wall = Line(m1, b1)
 reflection_line = original_line.reflection_line(wall)
@@ -67,13 +66,29 @@ b3 = reflection_line.b
 
 # Plotting
 
-x1 = np.linspace(-2, 2, 100)
+x1 = np.linspace(-20, 20, 100)
 y1 = 0.1 * x1 ** 2
 
-x2 = np.linspace(-2, 2, 100)
-y2 = m3*x2 + b3
+x = symbols('x', real=True)
+expr = m3*x + b3 - 0.1*x**2
 
-fig = plt.figure(figsize = (10, 5))
+sol = solve(expr, x)
+
+if b2 <= 0:
+  y_min = m3*float(sol[0]) + b3
+else:
+  y_min = m3*float(sol[1]) + b3
+
+
+x3 = np.linspace(float(sol[0]), float(sol[1]), 100)
+y3 = m3*x3 + b3
+
+
+fig = plt.figure(figsize = (8, 8))
+plt.vlines(x = b2, ymin = y_min, ymax = 40, color='green')
+plt.vlines(x = 0, ymin = 0, ymax = 40, color='black')
+plt.hlines(y = 0, xmin = -20, xmax = 20, color='black')
 plt.plot(x1, y1)
-plt.plot(x2, y2)
+plt.plot(x3, y3, color='green')
+plt.scatter(0, 2.5)
 plt.show()
