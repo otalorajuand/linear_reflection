@@ -2,62 +2,13 @@ import math
 from sympy import symbols, solve
 import matplotlib.pyplot as plt
 import numpy as np
+from line import Line
 
 
-class Line():
-
-    global x
-    x = symbols('x', real=True)
-  
-    def __init__(self, m=None, b=0):
-        self.m = m
-        self.b = b
-
-    def reflection_slope(self, wall):
-
-        if self.m == None:
-            tan = tan = abs(1/wall.m)
-        else:
-            tan = abs((self.m - wall.m)/(1 + self.m*wall.m))
-
-        expr = tan - abs(x - wall.m)/abs(1 + x*wall.m)
-        sol = solve(expr, x)
-
-        m = sol[1] if len(sol) > 1 else sol[0]
-
-        return m
-    
-    def reflection_intercept(self, wall, reflection_slope):
-
-        if self.m == None:
-
-            return 1 / (4*0.1)
-        
-        else:
-            
-            expr = (self.m*x + self.b) - (wall.m*x + wall.b)
-            sol = solve(expr, x)
-
-            y1 = wall.m*sol[0] + wall.b
-            return y1 - reflection_slope*sol[0]
-
-
-    def reflection_line(self, wall):
-
-        m = self.reflection_slope(wall)
-        b = self.reflection_intercept(wall, m)
-
-        print(f"The slope of the new line is: {m}")
-        print(f"The intercept with the Y axis is: {b}")
-        print(f"The equation of the new line is: y = {m}*x + {b}")
-
-        return Line(m, b)
-
-
-m2 = None
-b2 = 5
-m1 = 0.2 * b2
-b1 = 0.1*(b2**2) - m1*b2
+m2 = 2
+b2 = 30
+m1 = -2
+b1 = -10
 original_line = Line(m2, b2)
 wall = Line(m1, b1)
 reflection_line = original_line.reflection_line(wall)
@@ -65,6 +16,11 @@ m3 = reflection_line.m
 b3 = reflection_line.b
 
 # Plotting
+"""
+class Plot():
+
+    def __init__(self, )
+"""
 
 x1 = np.linspace(-20, 20, 100)
 y1 = 0.1 * x1 ** 2
