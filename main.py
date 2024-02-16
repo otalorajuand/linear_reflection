@@ -6,10 +6,9 @@ from plot import Plot
 
 if __name__ == "__main__":
 
-    b = 30
-    m = 2
+    intercept = 8
+    slope = -0.18
 
-    original_line = Line(m, b)
-
-    plot = Plot(original_line)
+    line = Line(m = slope, b = intercept)
+    plot = Plot(line)
     plot.show()

@@ -12,17 +12,21 @@ class Line():
 
     def wall(self):
 
-        expr = 0.1 * x**2 - (self.m * x + self.b)
+        m = self.m if self.m is not None else 0
+
+        expr = 0.1 * x**2 - (m * x + self.b)
         sol = solve(expr, x)
 
-        if self.m > 0:
+        if m == 0:
+            x_inter = self.b
+        elif m > 0:
             x_inter = sol[0]
         else:
             x_inter = sol[1]
 
         y_inter = 0.1 * (x_inter ** 2)
         m = 0.2 * (x_inter)
-        b = y_inter - m * x_inter
+        b = y_inter - m * x_inter  
 
         return Line(m, b)
 
@@ -40,7 +44,7 @@ class Line():
         expr = tan - abs(x - wall.m)/abs(1 + x*wall.m)
         sol = solve(expr, x)
 
-        m = sol[0] if sol[1] == self.m else sol[1]
+        m = sol[0] if self.m is None else sol[0] if sol[1] == self.m else sol[1]
 
         return m
     
