@@ -37,14 +37,14 @@ class Line():
         wall = self.wall()
 
         if self.m == None:
-            tan = tan = abs(1/wall.m)
+            tan = tan = abs(1 / wall.m)
         else:
             tan = abs((self.m - wall.m)/(1 + self.m*wall.m))
 
         expr = tan - abs(x - wall.m)/abs(1 + x*wall.m)
         sol = solve(expr, x)
 
-        m = sol[0] if self.m is None else sol[0] if sol[1] == self.m else sol[1]
+        m = sol[0]
 
         return m
     

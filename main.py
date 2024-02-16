@@ -11,4 +11,5 @@ if __name__ == "__main__":
 
     line = Line(m = slope, b = intercept)
     plot = Plot(line)
-    plot.show()
+    #plot.show()
+    plot.animation()
