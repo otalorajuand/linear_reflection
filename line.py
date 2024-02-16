@@ -20,7 +20,7 @@ class Line():
         expr = tan - abs(x - wall.m)/abs(1 + x*wall.m)
         sol = solve(expr, x)
 
-        m = sol[1] if len(sol) > 1 else sol[0]
+        m = sol[0] if sol[1] == self.m else sol[1]
 
         return m
     
