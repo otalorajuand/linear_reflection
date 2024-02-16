@@ -10,7 +10,27 @@ class Line():
         self.m = m
         self.b = b
 
-    def reflection_slope(self, wall):
+    def wall(self):
+
+        expr = 0.1 * x**2 - (self.m * x + self.b)
+        sol = solve(expr, x)
+
+        if self.m > 0:
+            x_inter = sol[0]
+        else:
+            x_inter = sol[1]
+
+        y_inter = 0.1 * (x_inter ** 2)
+        m = 0.2 * (x_inter)
+        b = y_inter - m * x_inter
+
+        return Line(m, b)
+
+
+
+    def reflection_slope(self):
+
+        wall = self.wall()
 
         if self.m == None:
             tan = tan = abs(1/wall.m)
@@ -24,7 +44,9 @@ class Line():
 
         return m
     
-    def reflection_intercept(self, wall, reflection_slope):
+    def reflection_intercept(self, reflection_slope):
+
+        wall = self.wall()
 
         if self.m == None:
 
@@ -39,13 +61,9 @@ class Line():
             return y1 - reflection_slope*sol[0]
 
 
-    def reflection_line(self, wall):
+    def reflection_line(self):
 
-        m = self.reflection_slope(wall)
-        b = self.reflection_intercept(wall, m)
-
-        print(f"The slope of the new line is: {m}")
-        print(f"The intercept with the Y axis is: {b}")
-        print(f"The equation of the new line is: y = {m}*x + {b}")
+        m = self.reflection_slope()
+        b = self.reflection_intercept(m)
 
         return Line(m, b)

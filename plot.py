@@ -10,13 +10,12 @@ class Plot():
     global x
     x = symbols('x', real=True)
 
-    def __init__(self, original_line, wall):
+    def __init__(self, original_line):
         self.original_line = original_line
-        self.wall = wall
 
     def show(self):
 
-        reflection_line = self.original_line.reflection_line(self.wall)
+        reflection_line = self.original_line.reflection_line()
         m3 = reflection_line.m
         b3 = reflection_line.b
 
