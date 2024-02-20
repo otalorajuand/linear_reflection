@@ -8,7 +8,7 @@ from operations import Operations
 
 if __name__ == "__main__":
 
-    intercept = -15
+    intercept = 10
     slope = None
 
     parabole = Parabole(a=0.1)
@@ -21,5 +21,5 @@ if __name__ == "__main__":
     plot = Plot(original_line=line, 
                 reflection_line=reflected_line, 
                 parabole=parabole)
-    plot.show()
     #plot.show()
+    plot.animation()
