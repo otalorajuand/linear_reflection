@@ -8,8 +8,8 @@ from operations import Operations
 
 if __name__ == "__main__":
 
-    intercept = 8
-    slope = -0.18
+    intercept = -15
+    slope = None
 
     parabole = Parabole(a=0.1)
     line = Line(m = slope, b = intercept)
