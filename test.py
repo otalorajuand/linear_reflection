@@ -1,24 +1,34 @@
+from sympy import symbols, solve
 import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
+from line import Line
+from plot import Plot
+from parabole import Parabole
 
-fig, ax = plt.subplots()
-xdata, ydata = [], []
-ln, = ax.plot([], [], 'ro')
+def interception_line_parabole(line, parabole):
 
-def init():
-    ax.set_xlim(0, 10)
-    ax.set_ylim(0, 10)
-    return ln,
+    x = symbols('x', real=True)
 
-def update(frame):
+    m = line.m if line.m is not None else 0
+    b = line.b
+    a = parabole.a
 
-    x_axis = np.linspace(frame, frame + 0.3, 40)
-    xdata.append(x_axis)
-    ydata.append(0.5 * x_axis)
-    ln.set_data(xdata, ydata)
-    return ln,
+    expr = a * x**2 - (m * x + b)
+    sol = solve(expr, x)
 
-ani = FuncAnimation(fig, update, frames=np.linspace(0, 2*np.pi, 80),
-                    init_func=init, blit=False)
-plt.show()
+    if m == 0:
+        x_inter = b
+    elif m > 0:
+        x_inter = sol[0]
+    else:
+        x_inter = sol[1]
+
+    y_inter = a * (x_inter ** 2)
+
+    return x_inter, y_inter
+
+line_test = Line(parabole=None,m=3, b=4)
+parabole_test = Parabole(0.2)
+
+
+x, y = interception_line_parabole(line_test, parabole_test)
+print(x, y)

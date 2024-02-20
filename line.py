@@ -13,6 +13,27 @@ class Line():
         self.b = b
         self.parabole = parabole
 
+    @staticmethod
+    def interception_line_parabole(line, parabole):
+
+        m = line.m if line.m is not None else 0
+        b = line.b
+        a = parabole.a
+
+        expr = a * x**2 - (m * x + b)
+        sol = solve(expr, x)
+
+        if m == 0:
+            x_inter = b
+        elif m > 0:
+            x_inter = sol[0]
+        else:
+            x_inter = sol[1]
+
+        y_inter = a * (x_inter ** 2)
+        m = 2 * a * (x_inter)
+        b = y_inter - m * x_inter
+
     def wall(self):
 
         m = self.m if self.m is not None else 0
@@ -50,7 +71,8 @@ class Line():
             m = sol[0]
         else:
             print('hello')
-            print(sol[0], self.m, sol[0] == self.m)
+            print(sol[0], self.m, (sol[0] == self.m))
+            print(-0.180000000000000 == -0.18)
             m = sol[1] if sol[0] == self.m else sol[0]
 
         return m
