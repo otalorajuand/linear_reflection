@@ -94,6 +94,8 @@ class Plot():
         xdata, ydata = [], []
         ln, = ax.plot([], [], 'green')
 
+        self.plot_parabole()
+
         def init():
             ax.set_xlim(-20, 20)
             ax.set_ylim(0, 40)
@@ -101,26 +103,23 @@ class Plot():
 
         def update_1(frame):
 
-            y_axis = np.linspace(frame - 5, frame)
-            xdata.append(np.linspace(b2, b2))
-            ydata.append(y_axis)
-            ln.set_data(xdata, ydata)
-            return ln,
-    
-        self.plot_parabole()
+            if frame > 10:
 
-        ani = FuncAnimation(fig, update_1, frames=np.linspace(40, 10 + 5, 20),
-                            init_func=init, blit=True)
-        
-        def update_2(frame):
+                y_axis = np.linspace(frame, frame)
+                xdata.append(np.linspace(b2, b2))
+                ydata.append(y_axis)
+                ln.set_data(xdata, ydata)
 
-            y_axis = np.linspace(frame - 5, frame)
-            xdata.append(np.linspace(b2, b2))
-            ydata.append(y_axis)
-            ln.set_data(xdata, ydata)
-            return ln,
-    
-        ani_2 = FuncAnimation(fig, update_2, frames=np.linspace(40, 10 + 5, 20),
+            elif frame <= 10:
+                x_axis = np.linspace(frame, frame)
+                xdata.append(x_axis)
+                ydata.append(m3 * x_axis + b3)
+                ln.set_data(xdata, ydata)
+            else:
+                pass
+            return ln,        
+
+        ani = FuncAnimation(fig, update_1, frames=np.linspace(40, -3, 20),
                             init_func=init, blit=True)
     
         plt.show()
