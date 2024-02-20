@@ -11,9 +11,7 @@ if __name__ == "__main__":
     slope = -0.18
 
     parabole = Parabole(0.1)
-    line = Line(parabole, m = slope, b = intercept)
-    print(line.get_reflection_slope())
-    print(line.get_reflection_intercept(line.get_reflection_slope()))
+    line = Line(m = slope, b = intercept)
     plot = Plot(line, parabole)
     #plot.show()
     #plot.show()
