@@ -119,7 +119,9 @@ class Plot():
                 pass
             return ln,        
 
-        ani = FuncAnimation(fig, update_1, frames=np.linspace(40, -3, 20),
-                            init_func=init, blit=True)
+        ani = FuncAnimation(fig, update_1, frames=np.concatenate([np.linspace(40, 10, 10), np.linspace(9.9, -3, 10)]),
+                            init_func=init, 
+                            blit=True,
+                            repeat=False)
     
         plt.show()
