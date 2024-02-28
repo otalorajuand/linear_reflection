@@ -8,7 +8,7 @@ from operations import Operations
 
 if __name__ == "__main__":
 
-    intercept = 10
+    intercept = -15
     slope = None
 
     parabole = Parabole(a=0.1)
