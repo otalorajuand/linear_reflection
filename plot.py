@@ -155,11 +155,9 @@ class Plot():
                 else:
                     pass
                 return ln,
-        
-            print(f"y_min: {y_min}, y_max: {y_max}, x_min: {x_min}, x_max: {x_max}")
 
             frames = np.concatenate(
-                [np.linspace(-40, float(y_min), 680), np.linspace(x_max, b2 - 0.1, 120)])
+                [np.linspace(-40, -float(y_min), 680), np.linspace(x_min + 0.1, x_max, 120)])
 
         ani = FuncAnimation(fig, update_1,
                             frames=frames,
